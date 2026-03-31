@@ -27,8 +27,10 @@ podman run -d --name portkey \
 
 # Remove
 
+```
 podman kill -s KILL portkey
 podman rm -f portkey
+```
 
 # On your bash profile, for convenience
 ```
