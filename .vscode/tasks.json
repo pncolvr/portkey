@@ -1,0 +1,65 @@
+{
+  "version": "2.0.0",
+  "inputs": [
+    {
+      "id": "onOffPick",
+      "type": "pickString",
+      "description": "Select whether to turn the firewall rule on or off",
+      "options": [
+        { "label": "on", "value": "enable" },
+        { "label": "off", "value": "disable" }
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "label": "Azure: Login",
+      "type": "shell",
+      "command": "bash",
+      "args": ["scripts/az-login.sh"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Azure: n8n firewall",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "scripts/n8n-firewall-my-ip.sh",
+        "${input:onOffPick}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Azure: SQL firewall",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "scripts/sql-firewall-my-ip.sh",
+        "${input:onOffPick}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Azure: VM firewall",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "scripts/vm-firewall-my-ip.sh",
+        "${input:onOffPick}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
