@@ -40,6 +40,11 @@ function _ensure-container-running(){
   fi
 }
 
+function _exec-in-container() {
+  _ensure-container-running
+  podman exec -it portkey "$@"
+}
+
 alias portkey-container-stop='podman kill -s KILL portkey && podman rm -f portkey'
 
 function portkey-container-start(){
@@ -52,27 +57,22 @@ function portkey-container-start(){
 }
 
 function portkey-n8n() {
-  _ensure-container-running
-  podman exec -it portkey /workspaces/scripts/azure/portkey/scripts/n8n-firewall-my-ip.sh "$@"
+  _exec-in-container /workspaces/scripts/azure/portkey/scripts/n8n-firewall-my-ip.sh "$@"
 }
 
 function portkey-sql() {
-  _ensure-container-running
-  podman exec -it portkey /workspaces/scripts/azure/portkey/scripts/sql-firewall-my-ip.sh "$@"
+  _exec-in-container /workspaces/scripts/azure/portkey/scripts/sql-firewall-my-ip.sh "$@"
 }
 
 function portkey-vm() {
-  _ensure-container-running
-  podman exec -it portkey /workspaces/scripts/azure/portkey/scripts/vm-firewall-my-ip.sh "$@"
+  _exec-in-container /workspaces/scripts/azure/portkey/scripts/vm-firewall-my-ip.sh "$@"
 }
 
 function portkey-list-rules() {
-  _ensure-container-running
-  podman exec -it portkey /workspaces/scripts/azure/portkey/scripts/list-my-rules.sh "$@"
+  _exec-in-container /workspaces/scripts/azure/portkey/scripts/list-my-rules.sh "$@"
 }
 
 function portkey-list-subs() {
-  _ensure-container-running
-  podman exec -it portkey /workspaces/scripts/azure/portkey/scripts/list-subs.sh "$@"
+  _exec-in-container /workspaces/scripts/azure/portkey/scripts/list-subs.sh "$@"
 }
 ```
