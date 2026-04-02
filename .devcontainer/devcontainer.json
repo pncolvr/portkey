@@ -2,10 +2,5 @@
   "name": "tools with az cli",
   "build": {
     "dockerfile": "../Dockerfile"
-  },
-  "customizations": {
-    "vscode": {
-      "extensions": ["SanaAjani.taskrunnercode"]
-    }
   }
 }
