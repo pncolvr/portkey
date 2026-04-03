@@ -1,5 +1,5 @@
 services:
-  azure-tools:
+  portkey:
     build:
       context: .
       dockerfile: Dockerfile

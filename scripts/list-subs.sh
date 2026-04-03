@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-utils=$(echo "$0" | xargs realpath | xargs dirname)/_common.sh
+utils=$(echo "${BASH_SOURCE[0]:-0}" | xargs realpath | xargs dirname)/_common.sh
 source "$utils"
 
 checkDependencies az jq
