@@ -48,12 +48,7 @@ function _exec-in-container() {
 alias portkey-container-stop='podman kill -s KILL portkey && podman rm -f portkey'
 
 function portkey-container-start(){
-  podman run -d --replace --name portkey \
-    -v portkey-azure:/home/vscode/.azure \
-    -v "/home/pncolvr/Projects/helpers/portkey":/workspaces/scripts/azure/portkey \
-    -w /workspaces/scripts/azure/portkey \
-    --restart=unless-stopped \
-    portkey:latest sleep infinity
+  podman start portkey
 }
 
 function portkey-n8n() {
