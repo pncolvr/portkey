@@ -6,18 +6,18 @@ This work is focused on virtual machines and SQL servers.
 
 # Build
 ```
-podman build -t portkey:latest -f Dockerfile .
-podman compose up -d
+docker build -t portkey:latest -f Dockerfile .
+docker compose up -d
 ```
 
 # Run
 ## create volume if not using the compose file
 
+```sh
+docker volume create portkey-volume
 ```
-podman volume create portkey-volume
-```
-```
-podman run -d --name portkey \
+```sh
+docker run -d --name portkey \
   -v portkey-volume:/home/vscode/.azure \
   -v "<repo_path>":/workspaces/scripts/azure/portkey \
   -w /workspaces/scripts/azure/portkey \
@@ -27,28 +27,28 @@ podman run -d --name portkey \
 
 # Remove
 
-```
-podman kill -s KILL portkey
-podman rm -f portkey
+```sh
+docker kill -s KILL portkey
+docker rm -f portkey
 ```
 
 # On your bash profile, for convenience
-```
+```sh
 function _ensure-container-running(){
-  if ! podman inspect -f '{{.State.Running}}' "portkey" 2>/dev/null | grep -qx true; then
+  if ! docker inspect -f '{{.State.Running}}' "portkey" 2>/dev/null | grep -qx true; then
     portkey-container-start
   fi
 }
 
 function _exec-in-container() {
   _ensure-container-running
-  podman exec -it portkey "$@"
+  docker exec -it portkey "$@"
 }
 
-alias portkey-container-stop='podman kill -s KILL portkey && podman rm -f portkey'
+alias portkey-container-stop='docker kill -s KILL portkey && docker rm -f portkey'
 
 function portkey-container-start(){
-  podman start portkey
+  docker start portkey
 }
 
 function portkey-n8n() {

@@ -20,6 +20,7 @@ else
   action="${1,,}"
 fi
 
+# TODO: add start and stop
 case "$action" in
   on|true|enable|1) desired="on" ;;
   off|false|disable|0) desired="off" ;;

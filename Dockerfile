@@ -28,5 +28,6 @@ COPY scripts/ ./scripts/
 RUN if [ "$COPY_SCRIPTS" = "true" ]; then chmod +x ./scripts/*.sh; fi
 
 USER ${USERNAME}
+RUN mkdir -p /home/${USERNAME}/.azure
 
 CMD ["bash"]
